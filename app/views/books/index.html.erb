@@ -1,0 +1,90 @@
+<main>
+  <% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+  <h1>Books - Index</h1>
+   <div class= "container px-5 px-sm-0">
+    <div class= "row">
+    <div class= "col-md-3">
+
+      <h2>User info</h2>
+      <table class="table">
+  <tbody><tr></tr>
+  <tr>
+	  <th>name</th>
+	  <th>見本</th>
+  </tr>
+  <tr>
+	  <th>introduction</th>
+	  <th></th>
+  </tr>
+</tbody></table>
+<div class= "row">
+<%= image_tag @user.get_profile_image(100,100), size: "100x100" %>
+</div>
+  <h2 class="mt-3">New book</h2>
+     <%= form_with model: @book do |f| %>
+  <div class="form-group">
+    <label for="book_title">Title</label>
+    <%= f.text_field :title, class:"form-control book_title" %>
+  </div>
+  <div class="form-group">
+    <label for="book_opinion">Opinion</label>
+  <%= f.text_area :body, class:"form-control book_body" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Create Book',class:"btn btn-success" %>
+  </div>
+
+  <% end %>
+
+  <div class="col-md-8 offset-md-1">
+      <h2>Users</h2>
+      <table class="table table-hover table-inverse">
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td>
+        <%= image_tag user.get_profile_image(80,80) %>
+      </td>
+      <td>
+        <%= user.name %>
+      </td>
+      <td>
+        <%=link_to "Show",user_path(user) %>
+      </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+    </div>
+  </div>
+</div>
+
+      </main>
+
+      <footer>
+  <div class="container mt-5">
+  	<div class="row">
+    	<div class="mx-auto">
+    		<p>CopyRight Infratop.inc</p>
+    	</div>
+    </div>
+  </div>
+</footer>
